@@ -1,7 +1,9 @@
 import { AppProps /*, AppContext */ } from 'next/app';
 import React from 'react';
 import Head from 'next/head';
-import '../styles/globals.css';
+import NextNprogress from 'nextjs-progressbar';
+import '../styles/globals.scss';
+import 'antd/dist/antd.less';
 
 function App({ Component, pageProps }: AppProps) {
 	return (
@@ -10,6 +12,12 @@ function App({ Component, pageProps }: AppProps) {
 				<title>My new cool app</title>
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
+			<NextNprogress
+				color='#00a68f'
+				startPosition={0.3}
+				stopDelayMs={200}
+				height={2}
+			/>
 			<Component {...pageProps} />
 		</>
 	);

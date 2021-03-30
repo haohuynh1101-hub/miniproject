@@ -2,8 +2,25 @@
 	"presets": ["next/babel"],
 	"plugins": [
 		[
+			"styless",
+			{
+				"cwd": "babelrc",
+				"import": "./styles/antd.less",
+				"lessOptions": {
+					"javascriptEnabled": true
+				}
+			}
+		],
+		[
 			"styled-components",
 			{ "ssr": true, "displayName": true, "preprocess": false }
+		],
+		[
+			"import",
+			{
+				"libraryName": "antd",
+				"style": true // or 'css'
+			}
 		]
 	]
 }

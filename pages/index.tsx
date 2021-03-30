@@ -1,26 +1,29 @@
 import Head from 'next/head';
-import styles from '../styles/Home.module.css';
+import styles from '../styles/Home.module.scss';
 import styled from 'styled-components';
+import Link from 'next/link';
 
-const Heading = styled.h1`
-	color: red;
+const Heading = styled.a`
+	color: @black;
 	font-size: 24px;
+	margin-top: 24px;
 `;
 
 export default function Home() {
 	return (
 		<div className={styles.container}>
+			<Head>
+				<title>Create Next App</title>
+				<link rel='icon' href='/favicon.ico' />
+			</Head>
 			<main className={styles.main}>
 				<h1 className={styles.title}>
 					Welcome to <a href='https://nextjs.org'>Next.js!</a>
 				</h1>
 
-				<Heading>Đây là customer</Heading>
-
-				<p className={styles.description}>
-					Get started by editing{' '}
-					<code className={styles.code}>pages/index.js</code>
-				</p>
+				<Link href='/ant-design'>
+					<Heading href='/ant-design'>To ant design demo</Heading>
+				</Link>
 
 				<div className={styles.grid}>
 					<a href='https://nextjs.org/docs' className={styles.card}>
