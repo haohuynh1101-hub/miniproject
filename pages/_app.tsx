@@ -1,8 +1,18 @@
 import { AppProps /*, AppContext */ } from 'next/app';
+import React from 'react';
+import Head from 'next/head';
 import '../styles/globals.css';
 
 function App({ Component, pageProps }: AppProps) {
-	return <Component {...pageProps} />;
+	return (
+		<>
+			<Head>
+				<title>My new cool app</title>
+				<link rel='icon' href='/favicon.ico' />
+			</Head>
+			<Component {...pageProps} />
+		</>
+	);
 }
 
 // Only uncomment this method if you have blocking data requirements for
