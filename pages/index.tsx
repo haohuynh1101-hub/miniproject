@@ -2,6 +2,8 @@ import Head from 'next/head';
 import styles from '../styles/Home.module.scss';
 import styled from 'styled-components';
 import Link from 'next/link';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const Heading = styled.a`
 	color: @black;
@@ -10,6 +12,7 @@ const Heading = styled.a`
 `;
 
 export default function Home() {
+	const { t } = useTranslation('common');
 	return (
 		<div className={styles.container}>
 			<Head>
@@ -18,7 +21,7 @@ export default function Home() {
 			</Head>
 			<main className={styles.main}>
 				<h1 className={styles.title}>
-					Welcome to <a href='https://nextjs.org'>Next.js!</a>
+					{t('welcome-to')} <a href='https://nextjs.org'>Next.js!</a>
 				</h1>
 
 				<Link href='/ant-design'>
@@ -69,3 +72,9 @@ export default function Home() {
 		</div>
 	);
 }
+
+export const getStaticProps = async ({ locale }) => ({
+	props: {
+		...(await serverSideTranslations(locale, ['common'])),
+	},
+});

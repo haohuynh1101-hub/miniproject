@@ -3,6 +3,7 @@ const withLess = require('@zeit/next-less');
 const lessToJS = require('less-vars-to-js');
 const withImages = require('next-images');
 const withSass = require(`@zeit/next-sass`);
+const { i18n } = require('./next-i18next.config')
 
 const fs = require('fs');
 const path = require('path');
@@ -16,6 +17,7 @@ const nextConfig = {
 	images: {
 		domains: [],
 	},
+	i18n
 };
 
 module.exports = withPlugins(

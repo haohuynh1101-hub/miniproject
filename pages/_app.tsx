@@ -5,6 +5,9 @@ import NextNprogress from 'nextjs-progressbar';
 import '../styles/globals.scss';
 import 'antd/dist/antd.less';
 
+import { appWithTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
 function App({ Component, pageProps }: AppProps) {
 	return (
 		<>
@@ -35,4 +38,10 @@ function App({ Component, pageProps }: AppProps) {
 //   return { ...appProps }
 // }
 
-export default App;
+export const getStaticProps = async ({ locale }) => ({
+	props: {
+		...(await serverSideTranslations(locale, ['common'])),
+	},
+});
+
+export default appWithTranslation(App);
