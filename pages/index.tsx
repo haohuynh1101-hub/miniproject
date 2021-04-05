@@ -4,6 +4,10 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { initializeStore, useStores } from '@models';
+import { GetServerSideProps } from 'next';
+import { getSnapshot } from 'mobx-state-tree';
+import { toJS } from 'mobx';
 
 const Heading = styled.a`
 	color: @black;
@@ -13,6 +17,8 @@ const Heading = styled.a`
 
 export default function Home() {
 	const { t } = useTranslation('common');
+	const { authStore } = useStores();
+	console.log('📢 authStore', authStore);
 	return (
 		<div className={styles.container}>
 			<Head>
@@ -73,8 +79,21 @@ export default function Home() {
 	);
 }
 
-export const getStaticProps = async ({ locale }) => ({
-	props: {
-		...(await serverSideTranslations(locale, ['common'])),
-	},
-});
+// export const getStaticProps = async ({ locale }) => ({
+// 	props: {
+// 		...(await serverSideTranslations(locale, ['common'])),
+// 	},
+// });
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+	const store = await initializeStore(null, ctx);
+
+	console.log('📢 store', toJS(store));
+
+	return {
+		props: {
+			initialState: getSnapshot(store),
+			...(await serverSideTranslations(ctx.locale as string, ['common'])),
+		},
+	};
+};

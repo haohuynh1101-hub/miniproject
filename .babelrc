@@ -1,6 +1,7 @@
 {
 	"presets": ["next/babel"],
 	"plugins": [
+		["@babel/plugin-proposal-decorators", { "legacy": true }],
 		[
 			"styless",
 			{
@@ -20,6 +21,22 @@
 			{
 				"libraryName": "antd",
 				"style": true // or 'css'
+			}
+		],
+		[
+			"module-resolver",
+			{
+				"root": ["."],
+				"alias": {
+					"@components": "./components",
+					"@utils": "./utils",
+					"@pages": "./pages",
+					"@styles": "./styles",
+					"@services": "./services",
+					"@models": "./models",
+					"@constants": "./constants",
+					"@containers": "./containers"
+				}
 			}
 		]
 	]

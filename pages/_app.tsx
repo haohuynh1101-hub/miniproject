@@ -1,5 +1,5 @@
 import { AppProps /*, AppContext */ } from 'next/app';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import NextNprogress from 'nextjs-progressbar';
 import '../styles/globals.scss';
@@ -7,21 +7,31 @@ import 'antd/dist/antd.less';
 
 import { appWithTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { initializeStore, RootStore, RootStoreProvider } from '@models';
 
 function App({ Component, pageProps }: AppProps) {
+	const [rootStore, setRootStore] = useState<RootStore | null>(null);
+
+	useEffect(() => {
+		initializeStore(pageProps?.initialState).then(setRootStore);
+	}, []);
+
+	if (!rootStore) return <></>;
 	return (
 		<>
 			<Head>
 				<title>My new cool app</title>
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
-			<NextNprogress
-				color='#00a68f'
-				startPosition={0.3}
-				stopDelayMs={200}
-				height={2}
-			/>
-			<Component {...pageProps} />
+			<RootStoreProvider value={rootStore}>
+				<NextNprogress
+					color='#00a68f'
+					startPosition={0.3}
+					stopDelayMs={200}
+					height={2}
+				/>
+				<Component {...pageProps} />
+			</RootStoreProvider>
 		</>
 	);
 }
