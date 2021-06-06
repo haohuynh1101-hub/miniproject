@@ -1,39 +1,39 @@
-import { AppProps /*, AppContext */ } from 'next/app';
-import React, { useEffect, useState } from 'react';
-import Head from 'next/head';
-import NextNprogress from 'nextjs-progressbar';
-import '../styles/globals.scss';
-import 'antd/dist/antd.less';
+import { AppProps /*, AppContext */ } from "next/app";
+import React, { useEffect, useState } from "react";
+import Head from "next/head";
+import NextNprogress from "nextjs-progressbar";
 
-import { appWithTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { initializeStore, RootStore, RootStoreProvider } from '@models';
+import { appWithTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { initializeStore, RootStore, RootStoreProvider } from "@models";
+import "tailwindcss/tailwind.css";
+import "../styles/antd.less";
 
 function App({ Component, pageProps }: AppProps) {
-	const [rootStore, setRootStore] = useState<RootStore | null>(null);
+  const [rootStore, setRootStore] = useState<RootStore | null>(null);
 
-	useEffect(() => {
-		initializeStore(pageProps?.initialState).then(setRootStore);
-	}, []);
+  useEffect(() => {
+    initializeStore(pageProps?.initialState).then(setRootStore);
+  }, []);
 
-	if (!rootStore) return <></>;
-	return (
-		<>
-			<Head>
-				<title>My new cool app</title>
-				<link rel='icon' href='/favicon.ico' />
-			</Head>
-			<RootStoreProvider value={rootStore}>
-				<NextNprogress
-					color='#00a68f'
-					startPosition={0.3}
-					stopDelayMs={200}
-					height={2}
-				/>
-				<Component {...pageProps} />
-			</RootStoreProvider>
-		</>
-	);
+  if (!rootStore) return <></>;
+  return (
+    <>
+      <Head>
+        <title>My new cool app</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <RootStoreProvider value={rootStore}>
+        <NextNprogress
+          color="#00a68f"
+          startPosition={0.3}
+          stopDelayMs={200}
+          height={2}
+        />
+        <Component {...pageProps} />
+      </RootStoreProvider>
+    </>
+  );
 }
 
 // Only uncomment this method if you have blocking data requirements for
@@ -49,9 +49,9 @@ function App({ Component, pageProps }: AppProps) {
 // }
 
 export const getStaticProps = async ({ locale }) => ({
-	props: {
-		...(await serverSideTranslations(locale, ['common'])),
-	},
+  props: {
+    ...(await serverSideTranslations(locale, ["common"])),
+  },
 });
 
 export default appWithTranslation(App);

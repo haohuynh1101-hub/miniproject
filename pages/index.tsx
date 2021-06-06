@@ -1,99 +1,14 @@
-import Head from 'next/head';
-import styles from '../styles/Home.module.scss';
-import styled from 'styled-components';
-import Link from 'next/link';
-import { useTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { initializeStore, useStores } from '@models';
-import { GetServerSideProps } from 'next';
-import { getSnapshot } from 'mobx-state-tree';
-import { toJS } from 'mobx';
+import React from "react";
 
-const Heading = styled.a`
-	color: @black;
-	font-size: 24px;
-	margin-top: 24px;
-`;
+const IndexPage = () => <React.Fragment />;
 
-export default function Home() {
-	const { t } = useTranslation('common');
-	const { authStore } = useStores();
-	console.log('📢 authStore', authStore);
-	return (
-		<div className={styles.container}>
-			<Head>
-				<title>Create Next App</title>
-				<link rel='icon' href='/favicon.ico' />
-			</Head>
-			<main className={styles.main}>
-				<h1 className={styles.title}>
-					{t('welcome-to')} <a href='https://nextjs.org'>Next.js!</a>
-				</h1>
-
-				<Link href='/ant-design'>
-					<Heading href='/ant-design'>To ant design demo</Heading>
-				</Link>
-
-				<div className={styles.grid}>
-					<a href='https://nextjs.org/docs' className={styles.card}>
-						<h3>Documentation &rarr;</h3>
-						<p>Find in-depth information about Next.js features and API.</p>
-					</a>
-
-					<a href='https://nextjs.org/learn' className={styles.card}>
-						<h3>Learn &rarr;</h3>
-						<p>Learn about Next.js in an interactive course with quizzes!</p>
-					</a>
-
-					<a
-						href='https://github.com/vercel/next.js/tree/master/examples'
-						className={styles.card}
-					>
-						<h3>Examples &rarr;</h3>
-						<p>Discover and deploy boilerplate example Next.js projects.</p>
-					</a>
-
-					<a
-						href='https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app'
-						className={styles.card}
-					>
-						<h3>Deploy &rarr;</h3>
-						<p>
-							Instantly deploy your Next.js site to a public URL with Vercel.
-						</p>
-					</a>
-				</div>
-			</main>
-
-			<footer className={styles.footer}>
-				<a
-					href='https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app'
-					target='_blank'
-					rel='noopener noreferrer'
-				>
-					Powered by{' '}
-					<img src='/vercel.svg' alt='Vercel Logo' className={styles.logo} />
-				</a>
-			</footer>
-		</div>
-	);
-}
-
-// export const getStaticProps = async ({ locale }) => ({
-// 	props: {
-// 		...(await serverSideTranslations(locale, ['common'])),
-// 	},
-// });
-
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-	const store = await initializeStore(null, ctx);
-
-	console.log('📢 store', toJS(store));
-
-	return {
-		props: {
-			initialState: getSnapshot(store),
-			...(await serverSideTranslations(ctx.locale as string, ['common'])),
-		},
-	};
+export const getServerSideProps = async () => {
+  return {
+    redirect: {
+      destination: "/ant-design",
+      permanent: false,
+    },
+  };
 };
+
+export default IndexPage;
