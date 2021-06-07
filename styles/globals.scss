@@ -14,3 +14,26 @@ a {
 * {
   box-sizing: border-box;
 }
+.box{
+  height: 600px;
+}
+circle{
+  width: 120px;
+  height: 120px;
+  border-width: 16px;
+}
+@media (min-width: 768px) { 
+  .box{
+    height: 800px;
+  }
+ }
+ @media (min-width: 1024px) { 
+  .box{
+    height: 800px;
+  }
+ }
+ @media (min-width: 1280px) { 
+  .box{
+    height: 600px;
+  }
+ }

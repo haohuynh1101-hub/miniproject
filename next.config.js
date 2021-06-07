@@ -15,15 +15,15 @@ const nextConfig = {
     return config;
   },
 
-  async redirects() {
-    return [
-      {
-        source: "/",
-        destination: "/",
-        permanent: true,
-      },
-    ];
-  },
+  // async redirects() {
+  //   return [
+  //     {
+  //       source: "/dashboard",
+  //       destination: "/",
+  //       permanent: true,
+  //     },
+  //   ];
+  // },
   lessLoaderOptions: {
     javascriptEnabled: true,
   },

@@ -8,6 +8,8 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { initializeStore, RootStore, RootStoreProvider } from "@models";
 import "tailwindcss/tailwind.css";
 import "../styles/antd.less";
+import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
+import "../styles/globals.scss";
 
 function App({ Component, pageProps }: AppProps) {
   const [rootStore, setRootStore] = useState<RootStore | null>(null);

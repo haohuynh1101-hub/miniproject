@@ -5,7 +5,7 @@ const IndexPage = () => <React.Fragment />;
 export const getServerSideProps = async () => {
   return {
     redirect: {
-      destination: "/ant-design",
+      destination: "/dashboard/CEO",
       permanent: false,
     },
   };

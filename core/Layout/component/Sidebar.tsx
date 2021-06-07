@@ -21,7 +21,7 @@ const listSideBar = [
 function Sidebar() {
   return (
     <>
-      <div className="bg-gray-800 text-blue-100 h-screen space-y-6 py-7 px-1 absolute inset-y-0 left-0 transform -translate-x-full transition lg:translate-x-0 lg:relative duration-200 ease-in-out">
+      <div className="bg-gray-800 text-blue-100 h-screen space-y-6 py-7 px-1 ">
         {/* logo  */}
 
         <a
@@ -61,8 +61,8 @@ function Sidebar() {
         </div>
         {/* nav */}
         <nav>
-          {listSideBar.map((sideBar) => (
-            <Link href={sideBar.url}>
+          {listSideBar.map((sideBar, index) => (
+            <Link key={index} href={sideBar.url}>
               <a className="block py-2 px-4 flex items-center transition duration-200 hover:bg-gray-700 rounded justify-between">
                 <div className="flex items-center">
                   <a className="text-white">{sideBar.icon}</a>
@@ -95,4 +95,4 @@ function Sidebar() {
   );
 }
 
-export default Sidebar;
+export { Sidebar };
