@@ -1,5 +1,11 @@
-import React from "react";
-import { CEOIcon, ManagerIcon, TeamIcon } from "component";
+import React, { useState } from "react";
+import {
+  CEOIcon,
+  ManagerIcon,
+  TeamIcon,
+  BusinessIcon,
+  CustomerSupportIcon,
+} from "component";
 import Link from "next/link";
 const listSideBar = [
   {
@@ -10,7 +16,18 @@ const listSideBar = [
   {
     title: "Manager",
     icon: <ManagerIcon />,
-    url: "/dashboard/Manager",
+    submenu: [
+      {
+        title: "Business",
+        icon: <BusinessIcon />,
+        url: "/dashboard/Manager/Business",
+      },
+      {
+        title: "CS",
+        icon: <CustomerSupportIcon />,
+        url: "/dashboard/Manager/CS",
+      },
+    ],
   },
   {
     title: "Team",
@@ -19,6 +36,7 @@ const listSideBar = [
   },
 ];
 function Sidebar() {
+  const [openSubmenu, setOpenSubmenu] = useState(false);
   return (
     <>
       <div className="bg-gray-800 text-blue-100 h-screen space-y-6 py-7 px-1 ">
@@ -61,38 +79,147 @@ function Sidebar() {
         </div>
         {/* nav */}
         <nav>
-          {listSideBar.map((sideBar, index) => (
-            <Link key={index} href={sideBar.url}>
-              <a className="block py-2 px-4 flex items-center transition duration-200 hover:bg-gray-700 rounded justify-between">
-                <div className="flex items-center">
-                  <a className="text-white">{sideBar.icon}</a>
-                  <span className="text-base text-white mx-1">
-                    {sideBar.title}
-                  </span>
+          {listSideBar.map((sideBar, index) => {
+            if (sideBar.url) {
+              return (
+                <Link key={index} href={sideBar.url}>
+                  <a className="block py-2 px-4 flex items-center transition duration-200 hover:bg-gray-700 rounded justify-between">
+                    <div className="flex items-center">
+                      <a className="text-white">{sideBar.icon}</a>
+                      <span className="text-base text-white mx-1">
+                        {sideBar.title}
+                      </span>
+                    </div>
+                    {sideBar.submenu ? (
+                      openSubmenu ? (
+                        <a onClick={() => setOpenSubmenu(false)}>
+                          <div className="transition duration-500 ease-in-out transform -rotate-90">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-6 w-6"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M15 19l-7-7 7-7"
+                              />
+                            </svg>
+                          </div>
+                        </a>
+                      ) : (
+                        <a onClick={() => setOpenSubmenu(true)}>
+                          <div className="transition duration-500 ease-in-out transform rotate-0">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-6 w-6"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M15 19l-7-7 7-7"
+                              />
+                            </svg>
+                          </div>
+                        </a>
+                      )
+                    ) : (
+                      ""
+                    )}
+                  </a>
+                </Link>
+              );
+            } else {
+              return (
+                <div>
+                  <a className="block py-2 px-4 flex items-center transition duration-200 hover:bg-gray-700 rounded justify-between">
+                    <div className="flex items-center">
+                      <a className="text-white">{sideBar.icon}</a>
+                      <span className="text-base text-white mx-1">
+                        {sideBar.title}
+                      </span>
+                    </div>
+                    {sideBar.submenu ? (
+                      openSubmenu ? (
+                        <a onClick={() => setOpenSubmenu(false)}>
+                          <div className="transition duration-500 ease-in-out transform -rotate-90">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-6 w-6"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M15 19l-7-7 7-7"
+                              />
+                            </svg>
+                          </div>
+                        </a>
+                      ) : (
+                        <a onClick={() => setOpenSubmenu(true)}>
+                          <div className="transition duration-500 ease-in-out transform rotate-0">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-6 w-6"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M15 19l-7-7 7-7"
+                              />
+                            </svg>
+                          </div>
+                        </a>
+                      )
+                    ) : (
+                      ""
+                    )}
+                  </a>
+                  {sideBar.submenu ? (
+                    openSubmenu ? (
+                      <div className="transition duration-500 ease-in-out transform">
+                        {sideBar.submenu.map((menu, index) => (
+                          <Link key={index} href={menu.url}>
+                            <a className=" block py-2 px-8 flex items-center transition duration-200 hover:bg-gray-700 rounded justify-between ">
+                              <div className="flex items-center">
+                                <a className="text-white">{menu.icon}</a>
+                                <span className="text-base text-white mx-1">
+                                  {menu.title}
+                                </span>
+                              </div>
+                            </a>
+                          </Link>
+                        ))}
+                      </div>
+                    ) : (
+                      ""
+                    )
+                  ) : (
+                    ""
+                  )}
                 </div>
-                <a>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M15 19l-7-7 7-7"
-                    />
-                  </svg>
-                </a>
-              </a>
-            </Link>
-          ))}
+              );
+            }
+          })}
         </nav>
       </div>
     </>
   );
 }
-
+const renderSubmenu = () => {};
 export { Sidebar };

@@ -1,31 +1,19 @@
 import { AppLayout } from "core/Layout";
-import React, { useContext } from "react";
-import { Table } from "antd";
+import React, { useContext, useEffect } from "react";
 import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 import { TableRoom } from "core/Layout/component";
 import { Chart } from "component";
 import { observer } from "mobx-react-lite";
-import { useStores } from "@models";
 import RoomStore from "mobx/RoomStore";
 import { toJS } from "mobx";
-// import "../styles/antd.less";
 
-const data = [
-  {
-    key: "1",
-    Sale: 100,
-    Target: 100,
-    PercentOfTarget: 100,
-    Different: 100,
-  },
-];
 const options: Highcharts.Options = {
   chart: {
     type: "column",
   },
 
   title: {
-    text: "Total fruit consumption, grouped by gender",
+    text: "",
   },
 
   xAxis: {
@@ -50,7 +38,7 @@ const options: Highcharts.Options = {
     {
       type: "column",
       name: "Target",
-      data: [5, 3],
+      data: [5, 10],
     },
     {
       type: "column",
@@ -59,19 +47,26 @@ const options: Highcharts.Options = {
     },
   ],
 };
-const DashboardCEOPage = observer((props) => {
+const DashboardCEOPage = observer(() => {
   const roomStore = useContext(RoomStore);
   const { listRooms } = toJS(roomStore);
+  const { getRoomQuarter } = roomStore;
+
+  useEffect(() => {
+    getRoomQuarter(1);
+  }, []);
   return (
     <AppLayout>
       {listRooms.map((room) => {
         return (
-          <>
+          <div className="my-12">
             <TableRoom label={room.title} data={room.data} />
-          </>
+          </div>
         );
       })}
-      <Chart options={options} />
+      <div className="my-16">
+        <Chart options={options} />
+      </div>
     </AppLayout>
   );
 });

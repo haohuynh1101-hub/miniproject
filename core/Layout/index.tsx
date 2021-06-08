@@ -1,16 +1,20 @@
 import { Sidebar } from "./component";
 import { Select } from "component";
 import { DatePicker } from "antd";
-import { Component, useContext } from "react";
+import { useContext } from "react";
 import RoomStore from "mobx/RoomStore";
-import { toJS } from "mobx";
-import TodoStore from "mobx/TodoStore";
-const optionDefine = ["Quý 1", "Quý 2", "Quý 3", "Quý 4"];
+const optionDefine = [
+  "Quý 1 | Tháng 1 - Tháng 3",
+  "Quý 2 | Tháng 3 - Tháng 6",
+  "Quý 3 | Tháng 6 - Tháng 9",
+  "Quý 4 | Tháng 9 - Tháng 12",
+];
 
 export const AppLayout = ({ children }) => {
   const roomStore = useContext(RoomStore);
   const { getRoomQuarter } = roomStore;
   const onselect = (value) => {
+    console.log(value);
     getRoomQuarter(value);
   };
 
