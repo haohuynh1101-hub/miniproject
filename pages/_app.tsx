@@ -1,15 +1,15 @@
-import { AppProps /*, AppContext */ } from "next/app";
-import React, { useEffect, useState } from "react";
-import Head from "next/head";
-import NextNprogress from "nextjs-progressbar";
+import { AppProps /*, AppContext */ } from 'next/app';
+import React, { useEffect, useState } from 'react';
+import Head from 'next/head';
+import NextNprogress from 'nextjs-progressbar';
 
-import { appWithTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { initializeStore, RootStore, RootStoreProvider } from "@models";
-import "tailwindcss/tailwind.css";
-import "../styles/antd.less";
-import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
-import "../styles/globals.scss";
+import { appWithTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { initializeStore, RootStore, RootStoreProvider } from '@models';
+import 'tailwindcss/tailwind.css';
+import '../styles/antd.less';
+import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
+import '../styles/globals.scss';
 
 function App({ Component, pageProps }: AppProps) {
   const [rootStore, setRootStore] = useState<RootStore | null>(null);
@@ -52,7 +52,7 @@ function App({ Component, pageProps }: AppProps) {
 
 export const getStaticProps = async ({ locale }) => ({
   props: {
-    ...(await serverSideTranslations(locale, ["common"])),
+    ...(await serverSideTranslations(locale, ['common'])),
   },
 });
 

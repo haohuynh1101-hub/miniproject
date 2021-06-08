@@ -1,79 +1,13 @@
-import { CardPerson } from "core/Layout/component";
-import { CirlecChart } from "./CircleChart";
-import { TeamData } from "./TeamData";
-const fakeCardPerson = [
-  {
-    rank: 1,
-    image: "https://via.placeholder.com/350",
-    name: "Nguyễn Văn A",
-    sales: 150,
-    target: 300,
-  },
-  {
-    rank: 2,
-    image: "https://via.placeholder.com/350",
-    name: "Nguyễn Văn B",
-    sales: 123321,
-    target: 321123,
-  },
-  {
-    rank: 3,
-    image: "https://via.placeholder.com/350",
-    name: "Nguyễn Văn C",
-    sales: 1200,
-    target: 3000,
-  },
-  {
-    rank: 4,
-    image: "https://via.placeholder.com/350",
-    name: "Nguyễn Văn D",
-    sales: 60,
-    target: 150,
-  },
-  {
-    rank: 5,
-    image: "https://via.placeholder.com/350",
-    name: "Nguyễn Văn E",
-    sales: 123,
-    target: 321,
-  },
-  {
-    rank: 6,
-    image: "https://via.placeholder.com/350",
-    name: "Trần Văn A",
-    sales: 60,
-    target: 321,
-  },
-  {
-    rank: 7,
-    image: "https://via.placeholder.com/350",
-    name: "Trần Văn B",
-    sales: 123,
-    target: 300,
-  },
-  {
-    rank: 8,
-    image: "https://via.placeholder.com/350",
-    name: "Trần Văn C",
-    sales: 123321,
-    target: 321123,
-  },
-  {
-    rank: 9,
-    image: "https://via.placeholder.com/350",
-    name: "Trần Văn D",
-    sales: 1233,
-    target: 3000,
-  },
-  {
-    rank: 10,
-    image: "https://via.placeholder.com/350",
-    name: "Trần Văn E",
-    sales: 1234,
-    target: 4000,
-  },
-];
-export const TeamContainer = () => {
+import { CardPerson } from 'core/Layout/component';
+import { toJS } from 'mobx';
+import { observer } from 'mobx-react-lite';
+import PersonStore from 'mobx/PersonStore';
+import { useContext } from 'react';
+import { CirlecChart } from './CircleChart';
+import { TeamData } from './TeamData';
+export const TeamContainer = observer(() => {
+  const personStore = useContext(PersonStore);
+  const { listPerson } = toJS(personStore);
   return (
     <>
       <div className="my-5">
@@ -86,7 +20,7 @@ export const TeamContainer = () => {
           <CirlecChart />
         </div>
         <div className=" col-span-3 xl:col-span-3 lg:col-span-6 md:col-span-6  box h-full ml-1 flex flex-col flex-wrap lg:flex-wrap ">
-          {fakeCardPerson.map((cardPerson, index) => {
+          {listPerson.map((cardPerson, index) => {
             return (
               <CardPerson
                 key={index}
@@ -105,4 +39,4 @@ export const TeamContainer = () => {
       </div>
     </>
   );
-};
+});

@@ -5,7 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "eslint \"**/*.+(ts|js|tsx)\"",
+    "lint-fix": "eslint --fix . \"**/*.+(ts|js|tsx)\"",
+    "format": "prettier --ignore-path .prettierignore \"**/*.+(ts|js|tsx)\" --write"
   },
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
@@ -46,7 +49,10 @@
     "autoprefixer": "^9.8.6",
     "babel-plugin-module-resolver": "^4.1.0",
     "babel-plugin-styled-components": "^1.12.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
     "postcss": "^7.0.35",
+    "prettier": "^2.3.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.4",
     "typescript": "^4.2.3"
   }
