@@ -4,7 +4,7 @@ module.exports = {
       name: 'dashboard-template',
       script: 'serve',
       env: {
-        PM2_SERVE_PATH: './.next/',
+        PM2_SERVE_PATH: './next/',
         PM2_SERVE_PORT: 4040,
       },
     },
